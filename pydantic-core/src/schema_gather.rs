@@ -101,16 +101,12 @@ fn children_values_required<'py>(
     key: &Bound<'py, PyString>,
 ) -> PyResult<()> {
     let items = required(schema, key)?;
-    if let Ok(items) = items.cast_exact::<PyDict>() {
-        // (iterating the dict directly, in order, rather than materializing `.values()`)
-        children.reserve(items.len());
-        for (_, value) in items.iter() {
-            children.push(value);
-        }
-        Ok(())
-    } else {
-        extend_from_iterable(children, &items.call_method0(intern!(schema.py(), "values"))?)
+    let dict = items.cast::<PyDict>()?;
+    children.reserve(dict.len());
+    for (_, value) in dict.iter() {
+        children.push(value);
     }
+    Ok(())
 }
 
 /// `children.extend(s['schema'] for s in schema['arguments_schema'])`
