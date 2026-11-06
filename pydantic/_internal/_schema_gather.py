@@ -1,6 +1,10 @@
 # pyright: reportTypedDictNotRequiredAccess=false, reportGeneralTypeIssues=false, reportArgumentType=false, reportAttributeAccessIssue=false
 from __future__ import annotations
 
+import sys
+import threading
+sys.setrecursionlimit(max(sys.getrecursionlimit(), 60000))
+
 from dataclasses import dataclass, field
 from typing import TypeAlias, TypedDict
 
@@ -246,7 +250,17 @@ def gather_schemas_for_cleaning(schema: CoreSchema, definitions: dict[str, CoreS
       saved in the context to be inlined (i.e. replaced by the definition it points to).
     """
     context = GatherContext(definitions)
-    traverse_schema(schema, context)
+    err: list[BaseException] = []
+    def runner() -> None:
+        try:
+            traverse_schema(schema, context)
+        except BaseException as e:
+            err.append(e)
+    t = threading.Thread(target=runner)
+    t.start()
+    t.join()
+    if err:
+        raise err[0]
 
     return {
         'collected_references': context.collected_references,
