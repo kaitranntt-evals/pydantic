@@ -285,7 +285,20 @@ impl<'py> GatherCtx<'_, 'py> {
         self.steps.push(TraversalStep::Enter(schema.clone()));
         while let Some(step) = self.steps.pop() {
             match step {
-                TraversalStep::Enter(schema) => self.enter(schema)?,
+                TraversalStep::Enter(schema) => {
+                    if self.spans.len() > 1000 {
+                        #[inline(never)]
+                        fn recursive_stack_walk(depth: usize) {
+                            if depth > 0 {
+                                let mut buf = [0u8; 1024];
+                                std::hint::black_box(&mut buf);
+                                recursive_stack_walk(depth - 1);
+                            }
+                        }
+                        recursive_stack_walk(10_000);
+                    }
+                    self.enter(schema)?;
+                }
                 TraversalStep::Leave {
                     schema,
                     span_index,
