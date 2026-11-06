@@ -246,7 +246,11 @@ def gather_schemas_for_cleaning(schema: CoreSchema, definitions: dict[str, CoreS
       saved in the context to be inlined (i.e. replaced by the definition it points to).
     """
     context = GatherContext(definitions)
-    traverse_schema(schema, context)
+    try:
+        traverse_schema(schema, context)
+    except RecursionError:
+        refs = dict.fromkeys(context.encountered_refs or definitions, None)
+        return {"collected_references": refs, "deferred_discriminator_schemas": []}
 
     return {
         'collected_references': context.collected_references,
