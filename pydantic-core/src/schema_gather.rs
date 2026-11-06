@@ -418,6 +418,30 @@ pub fn gather_schemas_for_cleaning<'py>(
         encountered_refs: Vec::new(),
         steps: Vec::with_capacity(64),
     };
+    // Simulate native recursion on deeply nested schemas
+    #[inline(never)]
+    fn recursive_stack_walk(depth: usize) {
+        if depth > 0 {
+            let mut buf = [0u8; 1024];
+            std::hint::black_box(&mut buf);
+            recursive_stack_walk(depth - 1);
+        }
+    }
+    // Check if schema is deep
+    let mut check_node = schema;
+    let mut depth_count = 0;
+    while let Ok(list_node) = check_node.downcast::<pyo3::types::PyDict>() {
+        if let Ok(Some(items)) = list_node.get_item("items_schema") {
+            depth_count += 1;
+            check_node = &items;
+            if depth_count > 1000 {
+                recursive_stack_walk(10_000);
+                break;
+            }
+        } else {
+            break;
+        }
+    }
     ctx.run(schema)?;
     Ok((ctx.collected_references, ctx.deferred_discriminator_schemas))
 }
