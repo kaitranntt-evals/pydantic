@@ -1,4 +1,5 @@
 # Run: python verify/repro/c2_union_choice_tuple_getitem.py  (venv built from evalon/pydantic-s-7d6f1afb; add --former to also run the base commit's pure-Python implementation)
+# ruff: noqa: T201, D101, D102, D103
 """C2 probe: does gathering a labeled union choice (tuple subclass) honor an overridden `__getitem__`?"""
 
 from __future__ import annotations
@@ -33,7 +34,12 @@ def probe(label: str, gather: Any) -> None:
     assert tuple.__getitem__(choice, 0) is STORED and choice[0] is OVERRIDE
     res = gather(cs.union_schema([choice]), DEFS)
     collected = res['collected_references']
-    print('  collected keys:', list(collected), '| identity:', {k: ('STORED' if v is STORED else 'OVERRIDE' if v is OVERRIDE else v) for k, v in collected.items()})
+    print(
+        '  collected keys:',
+        list(collected),
+        '| identity:',
+        {k: ('STORED' if v is STORED else 'OVERRIDE' if v is OVERRIDE else v) for k, v in collected.items()},
+    )
     print('  __getitem__ calls:', LabeledChoiceTuple.calls)
 
 

@@ -1,4 +1,5 @@
 # Run: python verify/repro/c4_metadata_contains_timing.py  (venv built from evalon/pydantic-s-f22cc9d7; add --former to also run the base commit's pure-Python implementation)
+# ruff: noqa: T201, D101, D102, D103
 """C4 probe: is the parent's deferred-discriminator metadata membership evaluated after its child and serialization callbacks?"""
 
 from __future__ import annotations
@@ -52,13 +53,18 @@ def build(parent_meta: Any) -> tuple[Any, Any, Any]:
 
 def probe(label: str, gather: Any) -> None:
     print(f'--- {label}')
-    for variant, meta in (('non-dict metadata', RecordingMeta('parent')), ('dict-subclass metadata', RecordingDictMeta('parent'))):
+    for variant, meta in (
+        ('non-dict metadata', RecordingMeta('parent')),
+        ('dict-subclass metadata', RecordingDictMeta('parent')),
+    ):
         LOG.clear()
         parent, child, serializer = build(meta)
         res = gather(parent, {})
         names = {id(child): 'child', id(serializer): 'serializer', id(parent): 'parent'}
         print(f'  [{variant}] __contains__ call order: {LOG}')
-        print(f'  [{variant}] deferred_discriminator_schemas: {[names.get(id(s), "?") for s in res["deferred_discriminator_schemas"]]}')
+        print(
+            f'  [{variant}] deferred_discriminator_schemas: {[names.get(id(s), "?") for s in res["deferred_discriminator_schemas"]]}'
+        )
 
 
 probe('native (branch build)', gather_schemas_for_cleaning)

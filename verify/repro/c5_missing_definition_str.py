@@ -1,4 +1,5 @@
 # Run: python verify/repro/c5_missing_definition_str.py  (venv built from evalon/pydantic-s-07335cde; add --former to also run the base commit's pure-Python class)
+# ruff: noqa: T201, D101, D102, D103
 """C5 probe: does str()/repr() of MissingDefinitionError match LookupError for the same argument?"""
 
 from __future__ import annotations
@@ -16,12 +17,16 @@ def show(label: str, exc_cls: type, gather) -> None:
     for ref in ('missing', 'ref\x00with_nul', 'ユニコード_ref'):
         mine = exc_cls(ref)
         base = LookupError(ref)
-        print(f'  constructed {ref!r}: str(MDE)={str(mine)!r} str(LookupError)={str(base)!r} equal={str(mine) == str(base)}')
+        print(
+            f'  constructed {ref!r}: str(MDE)={str(mine)!r} str(LookupError)={str(base)!r} equal={str(mine) == str(base)}'
+        )
         print(f'      repr(MDE)={mine!r}  repr(LookupError)={base!r}  args={mine.args!r}')
     try:
         gather(cs.definition_reference_schema('missing'), {})
     except exc_cls as e:
-        print(f'  raised by gather: str={str(e)!r} args={e.args!r} equal_to_LookupError_str={str(e) == str(LookupError(*e.args))}')
+        print(
+            f'  raised by gather: str={str(e)!r} args={e.args!r} equal_to_LookupError_str={str(e) == str(LookupError(*e.args))}'
+        )
 
 
 show('native (branch build)', MissingDefinitionError, gather_schemas_for_cleaning)

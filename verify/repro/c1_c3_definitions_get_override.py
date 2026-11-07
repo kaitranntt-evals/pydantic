@@ -1,4 +1,5 @@
 # Run: python verify/repro/c1_c3_definitions_get_override.py   (any venv with the branch's native build; add --former to also run the base commit's pure-Python implementation from /home/ubuntu/former_schema_gather.py)
+# ruff: noqa: T201, D101, D102, D103
 """C1/C3 probe: does definition-ref resolution honor a dict subclass's overridden `get`?"""
 
 from __future__ import annotations
@@ -45,14 +46,20 @@ def probe(label: str, gather: Any, exc: type[Exception]) -> None:
     absent_ref = cs.definition_reference_schema('absent')
     try:
         res = gather(cs.list_schema(absent_ref), defs)
-        print("  absent key (get supplies definition): RESOLVED ->", {k: (v is absent_ref) for k, v in res['collected_references'].items()})
+        print(
+            '  absent key (get supplies definition): RESOLVED ->',
+            {k: (v is absent_ref) for k, v in res['collected_references'].items()},
+        )
     except exc as e:
         print('  absent key (get supplies definition): MissingDefinitionError', e.args)
 
     hidden_ref = cs.definition_reference_schema('hidden')
     try:
         res = gather(cs.list_schema(hidden_ref), defs)
-        print("  stored key hidden by get->None: RESOLVED ->", {k: (v is hidden_ref) for k, v in res['collected_references'].items()})
+        print(
+            '  stored key hidden by get->None: RESOLVED ->',
+            {k: (v is hidden_ref) for k, v in res['collected_references'].items()},
+        )
     except exc as e:
         print('  stored key hidden by get->None: MissingDefinitionError', e.args)
     print('  overridden get() called with:', OverridingDefs.calls)
