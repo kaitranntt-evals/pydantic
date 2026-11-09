@@ -1,0 +1,22 @@
+### [unmutated] branch's own tests: tests/test_internal.py
+.........xx................................                              [100%]
+Results (0.53s):
+        41 passed
+         2 xfailed
+### [unmutated] branch's own tests: pydantic-core/tests/test_schema_gather.py
+..............................................                           [100%]
+Results (0.10s):
+        46 passed
+### [unmutated] eval fixtures that build the combined path
+         4 passed
+        28 deselected
+### [unmutated] behaviour probe
+ok   plain serializer return_schema -> definition-ref collected by identity
+ok   plain serializer return_schema -> deferred discriminator collected by identity
+ok   wrap serializer schema -> definition-ref collected by identity
+ok   wrap serializer return_schema -> definition-ref collected by identity
+ok   wrap serializer schema -> deferred discriminator collected by identity
+ok   wrap serializer return_schema -> deferred discriminator collected by identity
+ok   model with @field_serializer returning another model builds and dumps: {'a': {'x': 1}}
+failures=0
+probe exit=0

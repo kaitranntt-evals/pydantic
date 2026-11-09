@@ -1,0 +1,20 @@
+### [mutated] task-guideline suite: tests/types/unions/test_discriminated_union.py tests/test_forward_ref.py tests/test_internal.py
+.x........x..........xx................................                  [100%]
+Results (1.53s):
+       188 passed
+        11 xfailed
+### [mutated] task-guideline suite: pydantic-core/tests -k 'not test_docs'
+      5779 passed
+       126 skipped
+        64 deselected
+         8 xfailed
+### [mutated] wider pre-existing suite (not part of the added/changed tests): tests/test_serialize.py tests/test_computed_fields.py tests/test_generics.py
+         4 failed
+       243 passed
+         5 skipped
+         6 xfailed
+### [mutated] the 4 failures above, by error line (python -m pytest tests/test_serialize.py tests/test_computed_fields.py tests/test_generics.py -q -rf | grep "^E  +pydantic_core")
+E       pydantic_core._pydantic_core.SchemaError: Definitions error: definition `tests.test_serialize.test_forward_ref_for_serializers.<locals>.OtherModel:406185232` was never filled
+E       pydantic_core._pydantic_core.SchemaError: Definitions error: definition `tests.test_serialize.test_forward_ref_for_serializers.<locals>.OtherModel:407071824` was never filled
+E       pydantic_core._pydantic_core.SchemaError: Definitions error: definition `tests.test_serialize.test_forward_ref_for_serializers.<locals>.OtherModel:407082160` was never filled
+E       pydantic_core._pydantic_core.SchemaError: Definitions error: definition `tests.test_serialize.test_forward_ref_for_serializers.<locals>.OtherModel:407098656` was never filled

@@ -1,0 +1,19 @@
+### [control: pydantic-schema-gather-to-core-perfect] eval fixture, unmodified: pytest tests/test_eval_schema_gather_lifecycle.py -k test_threaded_calls_are_isolated  (x5)
+runs=5 passed=5 failed=0
+### [control: pydantic-schema-gather-to-core-perfect] eval fixture under the probe, C2_MODE=trace
+[c2-probe] mode=trace native_entry=None test=tests/test_eval_schema_gather_lifecycle.py::test_threaded_calls_are_isolated outcome=passed
+[c2-probe]   adapter: calls=22 threads=6 max_simultaneous_in_flight=2 outcomes=['ok']
+[c2-probe]     last-two adapter call on ThreadPoolExecutor-1_0: enter=+0.0us exit=+229.8us (ok)
+[c2-probe]     last-two adapter call on ThreadPoolExecutor-1_1: enter=+111.5us exit=+148.0us (ok)
+[c2-probe]   threading.Barrier.wait calls=2 threads=['ThreadPoolExecutor-1_0', 'ThreadPoolExecutor-1_1']
+         1 passed
+### [control: pydantic-schema-gather-to-core-perfect] eval fixture under the probe, C2_MODE=serialize
+[c2-probe] mode=serialize native_entry=None test=tests/test_eval_schema_gather_lifecycle.py::test_threaded_calls_are_isolated outcome=failed
+[c2-probe]   adapter: calls=22 threads=6 max_simultaneous_in_flight=1 outcomes=['BrokenBarrierError', 'ok']
+[c2-probe]     last-two adapter call on ThreadPoolExecutor-1_0: enter=+0.0us exit=+5000306.8us (BrokenBarrierError)
+[c2-probe]     last-two adapter call on ThreadPoolExecutor-1_1: enter=+5000614.2us exit=+5000746.1us (BrokenBarrierError)
+[c2-probe]   threading.Barrier.wait calls=2 threads=['ThreadPoolExecutor-1_0', 'ThreadPoolExecutor-1_1']
+E           threading.BrokenBarrierError
+         1 failed
+### [control: pydantic-schema-gather-to-core-perfect] verify/repro/c2_overlap_required_test.py
+         2 passed

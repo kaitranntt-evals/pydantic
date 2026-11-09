@@ -1,0 +1,43 @@
+### [mutated] branch's own tests: tests/test_internal.py
+.........xx................................                              [100%]
+Results (0.51s):
+        41 passed
+         2 xfailed
+### [mutated] branch's own tests: pydantic-core/tests/test_schema_gather.py
+..............................................                           [100%]
+Results (0.58s):
+        46 passed
+### [mutated] eval fixtures that build the combined path
+E       assert [128816642564800] == [128816642826...8816642564800]
+E         
+E         At index 0 diff: 128816642564800 != 128816642826816
+E         Right contains one more item: 128816642564800
+E         Use -v to get more diff
+E       assert [128816634557...8816634423872] == [128816634557...8816634423872]
+E         
+E         At index 1 diff: 128816634550720 != 128816634545344
+E         Right contains one more item: 128816634423872
+E         Use -v to get more diff
+E       AssertionError: assert ['typed_extra...or_item', ...] == ['typed_extra...or_item', ...]
+E         
+E         At index 42 diff: 'nullable_inner' != 'plain_ser_return'
+E         Right contains 4 more items, first extra item: 'dataclass_inner'
+E         Use -v to get more diff
+E       AssertionError: Metadata membership order incorrect
+E       assert ['child', 'se...er', 'parent'] == ['child', 'se...er', 'parent']
+E         
+E         At index 1 diff: 'serializer' != 'ser_return'
+E         Right contains one more item: 'parent'
+E         Use -v to get more diff
+         4 failed
+        28 deselected
+### [mutated] behaviour probe
+LOST plain serializer return_schema -> definition-ref collected by identity
+LOST plain serializer return_schema -> deferred discriminator collected by identity
+LOST wrap serializer schema -> definition-ref collected by identity
+LOST wrap serializer return_schema -> definition-ref collected by identity
+LOST wrap serializer schema -> deferred discriminator collected by identity
+LOST wrap serializer return_schema -> deferred discriminator collected by identity
+LOST model with @field_serializer returning another model: SchemaError: Definitions error: definition `__main__.Inner:1089316160` was never filled
+failures=7
+probe exit=1

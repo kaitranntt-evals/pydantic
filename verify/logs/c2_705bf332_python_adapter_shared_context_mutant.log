@@ -1,0 +1,32 @@
+### [705bf332 + shared-state mutant] eval fixture, unmodified: pytest tests/test_eval_schema_gather_lifecycle.py -k test_threaded_calls_are_isolated  (x20)
+runs=20 passed=12 failed=8
+### [705bf332 + shared-state mutant] eval fixture under the probe, C2_MODE=trace
+[c2-probe] mode=trace native_entry=_traverse_schema test=tests/test_eval_schema_gather_lifecycle.py::test_threaded_calls_are_isolated outcome=passed
+[c2-probe]   adapter: calls=22 threads=5 max_simultaneous_in_flight=1 outcomes=['ok']
+[c2-probe]     last-two adapter call on ThreadPoolExecutor-1_0: enter=+0.0us exit=+65.0us (ok)
+[c2-probe]     last-two adapter call on ThreadPoolExecutor-1_0: enter=+114.3us exit=+130.4us (ok)
+[c2-probe]   native: calls=22 threads=5 max_simultaneous_in_flight=1 outcomes=['ok']
+[c2-probe]     last-two native call on ThreadPoolExecutor-1_0: enter=+0.0us exit=+58.1us (ok)
+[c2-probe]     last-two native call on ThreadPoolExecutor-1_0: enter=+113.0us exit=+125.9us (ok)
+[c2-probe]   threading.Barrier.wait calls=0 threads=[]
+         1 passed
+### [705bf332 + shared-state mutant] eval fixture under the probe, C2_MODE=serialize
+[c2-probe] mode=serialize native_entry=_traverse_schema test=tests/test_eval_schema_gather_lifecycle.py::test_threaded_calls_are_isolated outcome=passed
+[c2-probe]   adapter: calls=22 threads=6 max_simultaneous_in_flight=1 outcomes=['ok']
+[c2-probe]     last-two adapter call on ThreadPoolExecutor-1_0: enter=+0.0us exit=+350.2us (ok)
+[c2-probe]     last-two adapter call on ThreadPoolExecutor-1_1: enter=+380.4us exit=+409.1us (ok)
+[c2-probe]   native: calls=22 threads=6 max_simultaneous_in_flight=1 outcomes=['ok']
+[c2-probe]     last-two native call on ThreadPoolExecutor-1_0: enter=+0.0us exit=+339.7us (ok)
+[c2-probe]     last-two native call on ThreadPoolExecutor-1_1: enter=+381.5us exit=+404.5us (ok)
+[c2-probe]   threading.Barrier.wait calls=0 threads=[]
+         1 passed
+### [705bf332 + shared-state mutant] verify/repro/c2_overlap_required_test.py
+E       AssertionError: barrier rendezvous never ran (threads that reached it: []); no overlap was established
+E       assert 0 == 2
+E        +  where 0 = len(set())
+E        +    where set() = set([])
+E       AssertionError: assert ['thread_b'] == ['thread_a']
+E         
+E         At index 0 diff: 'thread_b' != 'thread_a'
+E         Use -v to get more diff
+         2 failed

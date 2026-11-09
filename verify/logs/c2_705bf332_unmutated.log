@@ -1,0 +1,29 @@
+### [705bf332 unmutated] eval fixture, unmodified: pytest tests/test_eval_schema_gather_lifecycle.py -k test_threaded_calls_are_isolated  (x20)
+runs=20 passed=20 failed=0
+### [705bf332 unmutated] eval fixture under the probe, C2_MODE=trace
+[c2-probe] mode=trace native_entry=_traverse_schema test=tests/test_eval_schema_gather_lifecycle.py::test_threaded_calls_are_isolated outcome=passed
+[c2-probe]   adapter: calls=22 threads=5 max_simultaneous_in_flight=1 outcomes=['ok']
+[c2-probe]     last-two adapter call on ThreadPoolExecutor-1_0: enter=+0.0us exit=+43.4us (ok)
+[c2-probe]     last-two adapter call on ThreadPoolExecutor-1_0: enter=+80.9us exit=+94.6us (ok)
+[c2-probe]   native: calls=22 threads=5 max_simultaneous_in_flight=1 outcomes=['ok']
+[c2-probe]     last-two native call on ThreadPoolExecutor-1_0: enter=+0.0us exit=+39.0us (ok)
+[c2-probe]     last-two native call on ThreadPoolExecutor-1_0: enter=+80.2us exit=+91.4us (ok)
+[c2-probe]   threading.Barrier.wait calls=0 threads=[]
+         1 passed
+### [705bf332 unmutated] eval fixture under the probe, C2_MODE=serialize
+[c2-probe] mode=serialize native_entry=_traverse_schema test=tests/test_eval_schema_gather_lifecycle.py::test_threaded_calls_are_isolated outcome=passed
+[c2-probe]   adapter: calls=22 threads=5 max_simultaneous_in_flight=1 outcomes=['ok']
+[c2-probe]     last-two adapter call on ThreadPoolExecutor-1_0: enter=+0.0us exit=+44.5us (ok)
+[c2-probe]     last-two adapter call on ThreadPoolExecutor-1_0: enter=+82.7us exit=+96.3us (ok)
+[c2-probe]   native: calls=22 threads=5 max_simultaneous_in_flight=1 outcomes=['ok']
+[c2-probe]     last-two native call on ThreadPoolExecutor-1_0: enter=+0.0us exit=+39.9us (ok)
+[c2-probe]     last-two native call on ThreadPoolExecutor-1_0: enter=+81.9us exit=+93.0us (ok)
+[c2-probe]   threading.Barrier.wait calls=0 threads=[]
+         1 passed
+### [705bf332 unmutated] verify/repro/c2_overlap_required_test.py
+E       AssertionError: barrier rendezvous never ran (threads that reached it: []); no overlap was established
+E       assert 0 == 2
+E        +  where 0 = len(set())
+E        +    where set() = set([])
+         1 failed
+         1 passed

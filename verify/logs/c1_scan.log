@@ -1,0 +1,61 @@
+### added tests in tests/test_internal.py (-k "test_gather_deep_schema or test_clean_deep_schema or test_gather_missing_definition_error or test_gather_incremental_context or test_gather_traversal_helpers")
+[c1-scan] wrapped native delegates: ['_gather_schemas']
+[c1-scan] tests that invoked the gatherer: 6
+[c1-scan] TOTAL: {'gather_calls': 18}
+[c1-scan] attachments reaching a definition-ref/discriminator through schema|return_schema: 0
+         6 passed
+        37 deselected
+### pydantic-core/tests/test_schema_gather.py (new file)
+[c1-scan] wrapped native delegates: ['_gather_schemas']
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[arguments-fields17]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[arguments-v3-fields18]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[call-fields19]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[chain-fields10]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[computed-field-fields20]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[custom-error-fields34]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[dataclass-args-fields15]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[dataclass-field-fields31]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[dataclass-fields28]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[default-fields26]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[definitions-fields0]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[dict-fields6]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[frozendict-fields7]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[frozenset-fields3]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[function-after-fields24]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[function-before-fields21]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[function-plain-fields22]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[function-wrap-fields23]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[generator-fields4]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[json-fields33]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[json-or-python-fields12]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[lax-or-strict-fields11]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[list-fields1]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[model-field-fields29]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[model-fields-fields13]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[model-fields27]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[named-tuple-field-fields32]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[named-tuple-fields16]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[nullable-fields25]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[set-fields2]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[tagged-union-fields9]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[tuple-fields5]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[typed-dict-field-fields30]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[typed-dict-fields14]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_child_traversal[union-fields8]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_deep_traversal[serialization]: {'gather_calls': 1, 'serialization_attachments': 10000, 'other': 9999, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_missing_reference_order_and_unreachable_definitions: {'gather_calls': 2, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests/test_schema_gather.py::test_repeated_reference_skips_serialization_and_metadata[False]: {'gather_calls': 1, 'serialization_attachments': 2, 'direct': 2}
+[c1-scan] tests/test_schema_gather.py::test_repeated_reference_skips_serialization_and_metadata[True]: {'gather_calls': 1, 'serialization_attachments': 1, 'direct': 1}
+[c1-scan] tests that invoked the gatherer: 46
+[c1-scan] TOTAL: {'gather_calls': 47, 'serialization_attachments': 10039, 'direct': 40, 'other': 9999}
+[c1-scan] attachments reaching a definition-ref/discriminator through schema|return_schema: 0
+        46 passed
+### positive control for the scanner: eval fixtures tests/test_eval_schema_gather_references.py tests/test_eval_schema_gather_traversal.py
+[c1-scan] wrapped native delegates: ['_gather_schemas']
+[c1-scan] tests/test_eval_schema_gather_references.py::test_definition_ref_serialization_and_metadata: {'gather_calls': 4, 'serialization_attachments': 4, 'combined': 4, 'combined_via_return_schema': 4}
+[c1-scan] tests/test_eval_schema_gather_references.py::test_metadata_evaluated_after_children_and_serializers: {'gather_calls': 2, 'serialization_attachments': 2, 'combined': 2, 'combined_via_return_schema': 2}
+[c1-scan] tests/test_eval_schema_gather_traversal.py::test_all_schema_kinds: {'gather_calls': 2, 'serialization_attachments': 6, 'combined': 6, 'combined_via_return_schema': 6, 'combined_via_schema': 2}
+[c1-scan] tests/test_eval_schema_gather_traversal.py::test_metadata_membership_callbacks_follow_post_order: {'gather_calls': 2, 'serialization_attachments': 2, 'combined': 2, 'combined_via_return_schema': 2}
+[c1-scan] tests that invoked the gatherer: 31
+[c1-scan] TOTAL: {'gather_calls': 210, 'serialization_attachments': 14, 'combined': 14, 'combined_via_return_schema': 14, 'combined_via_schema': 2}
+[c1-scan] attachments reaching a definition-ref/discriminator through schema|return_schema: 14

@@ -1,0 +1,28 @@
+diff --git a/pydantic/_internal/_schema_gather.py b/pydantic/_internal/_schema_gather.py
+index 36ee4f8f8..2062e0faf 100644
+--- a/pydantic/_internal/_schema_gather.py
++++ b/pydantic/_internal/_schema_gather.py
+@@ -138,10 +138,20 @@ def gather_schemas_for_cleaning(schema: CoreSchema, definitions: dict[str, CoreS
+       the `'definition-ref'` schema is encountered more that once, the schema itself is also
+       saved in the context to be inlined (i.e. replaced by the definition it points to).
+     """
+-    context = GatherContext(definitions)
++    # VERIFY MUTATION (C2): one process-wide scratch context is reused by every call instead of a fresh one,
++    # so two gather calls that are in flight at the same time share (and clobber) each other's state.
++    context = _SHARED_CONTEXT
++    context.definitions = definitions
++    context.collected_references.clear()
++    context.deferred_discriminator_schemas.clear()
++    context.visited.clear()
++    context.encountered_refs.clear()
+     traverse_schema(schema, context)
+ 
+     return {
+-        'collected_references': context.collected_references,
+-        'deferred_discriminator_schemas': context.deferred_discriminator_schemas,
++        'collected_references': dict(context.collected_references),
++        'deferred_discriminator_schemas': list(context.deferred_discriminator_schemas),
+     }
++
++
++_SHARED_CONTEXT = GatherContext({})

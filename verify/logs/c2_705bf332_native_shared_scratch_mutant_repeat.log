@@ -1,0 +1,5 @@
+### [705bf332 + native shared-scratch mutant] 30 fresh processes: C2_MODE=trace C2_WARMUP=0 python -m pytest -p c2_overlap_probe tests/test_eval_schema_gather_lifecycle.py -k test_threaded_calls_are_isolated -q -s
+     11 [c2-probe] RESULT outcome=failed gathers_in_flight_together=2 barrier_waits=0 warmup=0
+     19 [c2-probe] RESULT outcome=passed gathers_in_flight_together=1 barrier_waits=0 warmup=0
+### [705bf332 + native shared-scratch mutant] 30 fresh processes: C2_MODE=trace C2_WARMUP=1 python -m pytest -p c2_overlap_probe tests/test_eval_schema_gather_lifecycle.py -k test_threaded_calls_are_isolated -q -s
+     30 [c2-probe] RESULT outcome=passed gathers_in_flight_together=1 barrier_waits=0 warmup=1

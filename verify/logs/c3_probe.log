@@ -1,0 +1,31 @@
+### 705bf332: python verify/repro/c3_bookkeeping_interface_probe.py
+native gathering entry points exported by pydantic_core._pydantic_core:
+  _traverse_schema(schema, definitions, collected_references, deferred_discriminator_schemas, visited, encountered_refs, missing_definition_error)
+required positional parameters of _traverse_schema: ['schema', 'definitions', 'collected_references', 'deferred_discriminator_schemas', 'visited', 'encountered_refs', 'missing_definition_error'] (7)
+
+1. calling the native entry point with only the schema, the definitions and the error type:
+   TypeError: _traverse_schema() missing 4 required positional arguments: 'deferred_discriminator_schemas', 'visited', 'encountered_refs', and 'missing_definition_error'
+
+2. calling it with the result containers but no traversal bookkeeping (visited=None, encountered_refs=None):
+   TypeError: 'None' is not an instance of 'dict'
+
+3. tracing what the Python adapter passes for one gather_schemas_for_cleaning() call:
+   native call: 7 positional, 0 keyword arguments
+   argument (type, len) on entry: [('dict', 2), ('dict', 1), ('dict', 0), ('list', 0), ('dict', 0), ('list', 0), ('type', None)]
+   args[2] is the Python-allocated GatherContext.collected_references: True
+   args[3] is the Python-allocated GatherContext.deferred_discriminator_schemas: True
+   args[4] is the Python-allocated GatherContext.visited: True
+   args[5] is the Python-allocated GatherContext.encountered_refs: True
+   after the native call, Python-owned visited = [(0, 1), (0, 1), (0, 1), (1, 1)]
+   after the native call, Python-owned encountered_refs = ['leaf']
+   returned collected_references is the Python-allocated dict: True
+   defining two BaseModel classes (real call site, GenerateSchema.clean_schema) made 2 more native call(s), each with [7] positional args and Python-allocated containers: True
+
+Python allocates and passes traversal bookkeeping as required native arguments: True
+exit=1
+### pyd-705bf332 (f68cf37db): python verify/repro/c3_bookkeeping_cost_probe.py
+nodes=~101k collected=1000 best_of_5=143.5 ms python_heap_peak_during_call=18.92 MB
+### pyd-45c07a40 (020c29525): python verify/repro/c3_bookkeeping_cost_probe.py
+nodes=~101k collected=1000 best_of_5=80.8 ms python_heap_peak_during_call=0.04 MB
+### pydantic (585c99449): python verify/repro/c3_bookkeeping_cost_probe.py
+nodes=~101k collected=1000 best_of_5=82.4 ms python_heap_peak_during_call=0.04 MB

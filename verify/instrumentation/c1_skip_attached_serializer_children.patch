@@ -1,0 +1,53 @@
+diff --git a/pydantic-core/src/schema_gather.rs b/pydantic-core/src/schema_gather.rs
+index c93a82ac5..e9e53e34a 100644
+--- a/pydantic-core/src/schema_gather.rs
++++ b/pydantic-core/src/schema_gather.rs
+@@ -24,6 +24,8 @@ impl<'py> GatherContext<'py> {
+     fn traverse(&mut self, schema: Bound<'py, PyDict>, missing_definition_error: &Bound<'py, PyType>) -> PyResult<()> {
+         let py = schema.py();
+         let mut stack = vec![Frame::Visit(schema)];
++        // VERIFY MUTATION (C1): schemas reached as a `serialization` attachment.
++        let mut attached_serializers: ahash::AHashSet<usize> = ahash::AHashSet::new();
+         while let Some(frame) = stack.pop() {
+             let schema = match frame {
+                 Frame::Visit(schema) => schema,
+@@ -51,6 +53,8 @@ impl<'py> GatherContext<'py> {
+             }
+             let start = self.encountered_refs.len();
+             self.visited.insert(schema_id, (start, None));
++            // VERIFY MUTATION (C1): an attached serializer's `schema`/`return_schema` are not traversed.
++            let attached = attached_serializers.contains(&schema_id);
+             let schema_type = schema.as_any().get_item(intern!(py, "type"))?;
+             let schema_type = schema_type.cast::<PyString>()?.to_str()?;
+ 
+@@ -154,15 +158,26 @@ impl<'py> GatherContext<'py> {
+                 }
+                 "function-plain" => {
+                     // The same schema type is used for validators and serializers.
+-                    push_optional(&mut stack, &schema, intern!(py, "return_schema"))?;
++                    if !attached {
++                        push_optional(&mut stack, &schema, intern!(py, "return_schema"))?;
++                    }
+                     push_optional(&mut stack, &schema, intern!(py, "json_schema_input_schema"))?;
+                 }
+                 "function-wrap" => {
+-                    push_optional(&mut stack, &schema, intern!(py, "return_schema"))?;
+-                    push_optional(&mut stack, &schema, intern!(py, "schema"))?;
++                    if !attached {
++                        push_optional(&mut stack, &schema, intern!(py, "return_schema"))?;
++                        push_optional(&mut stack, &schema, intern!(py, "schema"))?;
++                    }
+                     push_optional(&mut stack, &schema, intern!(py, "json_schema_input_schema"))?;
+                 }
+-                _ => push_optional(&mut stack, &schema, intern!(py, "schema"))?,
++                _ => {
++                    if !attached {
++                        push_optional(&mut stack, &schema, intern!(py, "schema"))?;
++                    }
++                }
++            }
++            if let Some(serializer) = schema.get_item(intern!(py, "serialization"))? {
++                attached_serializers.insert(serializer.as_ptr() as usize);
+             }
+             push_optional(&mut stack, &schema, intern!(py, "serialization"))?;
+             // Push in traversal order above, then reverse so the first child is popped first.

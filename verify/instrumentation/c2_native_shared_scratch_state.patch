@@ -1,0 +1,65 @@
+diff --git a/pydantic-core/src/schema_gather.rs b/pydantic-core/src/schema_gather.rs
+index b0774ed78..80e180d81 100644
+--- a/pydantic-core/src/schema_gather.rs
++++ b/pydantic-core/src/schema_gather.rs
+@@ -13,6 +13,18 @@ enum Work<'py> {
+ 
+ /// The containers belong to Python's GatherContext. Keeping them in place also supports callers
+ /// which traverse several roots with the same context, or inspect it after an error.
++// VERIFY MUTATION (C2): every native invocation works in one process-wide scratch state (seeded from, and
++// copied back to, the caller's containers), so two invocations that are in flight together clobber each other.
++static SCRATCH: pyo3::sync::PyOnceLock<(Py<PyDict>, Py<PyList>, Py<PyDict>, Py<PyList>)> = pyo3::sync::PyOnceLock::new();
++
++fn replace_list<'py>(target: &Bound<'py, PyList>, source: &Bound<'py, PyList>) -> PyResult<()> {
++    target.del_slice(0, target.len())?;
++    for item in source.iter() {
++        target.append(item)?;
++    }
++    Ok(())
++}
++
+ #[pyfunction]
+ pub fn _traverse_schema<'py>(
+     schema: Bound<'py, PyDict>,
+@@ -22,6 +34,41 @@ pub fn _traverse_schema<'py>(
+     visited: &Bound<'py, PyDict>,
+     encountered_refs: &Bound<'py, PyList>,
+     missing_definition_error: &Bound<'py, PyType>,
++) -> PyResult<()> {
++    let py = schema.py();
++    let (collected, deferred, spans, refs) = SCRATCH.get_or_init(py, || {
++        (
++            PyDict::new(py).unbind(),
++            PyList::empty(py).unbind(),
++            PyDict::new(py).unbind(),
++            PyList::empty(py).unbind(),
++        )
++    });
++    let (collected, deferred, spans, refs) = (collected.bind(py), deferred.bind(py), spans.bind(py), refs.bind(py));
++    collected.clear();
++    collected.update(collected_references.as_mapping())?;
++    replace_list(deferred, deferred_discriminator_schemas)?;
++    spans.clear();
++    spans.update(visited.as_mapping())?;
++    replace_list(refs, encountered_refs)?;
++    let result = traverse_in_scratch(schema, definitions, collected, deferred, spans, refs, missing_definition_error);
++    collected_references.clear();
++    collected_references.update(collected.as_mapping())?;
++    replace_list(deferred_discriminator_schemas, deferred)?;
++    visited.clear();
++    visited.update(spans.as_mapping())?;
++    replace_list(encountered_refs, refs)?;
++    result
++}
++
++fn traverse_in_scratch<'py>(
++    schema: Bound<'py, PyDict>,
++    definitions: &Bound<'py, PyDict>,
++    collected_references: &Bound<'py, PyDict>,
++    deferred_discriminator_schemas: &Bound<'py, PyList>,
++    visited: &Bound<'py, PyDict>,
++    encountered_refs: &Bound<'py, PyList>,
++    missing_definition_error: &Bound<'py, PyType>,
+ ) -> PyResult<()> {
+     let py = schema.py();
+     let mut work = vec![Work::Visit(schema)];
