@@ -1,0 +1,21 @@
+$ cd /home/ubuntu/repos/pydantic && /opt/venv/bin/python verify/repro/c3_eager_child_collection_error_order.py
+lax-or-strict: lax_schema=<missing ref>, strict_schema absent
+    -> KeyError: 'strict_schema'
+union: choices=[<missing ref>, ()]
+    -> IndexError: tuple index out of range
+union: choices=[<missing ref>, []] (list-valued child)
+    -> MissingDefinitionError('missing')
+chain: steps=[<missing ref>, []] (list-valued child)
+    -> MissingDefinitionError('missing')
+tuple: items_schema=[<missing ref>, 1]
+    -> MissingDefinitionError('missing')
+json-or-python: json_schema=<missing ref>, python_schema absent
+    -> KeyError: 'python_schema'
+dict: keys_schema=<missing ref>, values_schema=[]
+    -> MissingDefinitionError('missing')
+arguments: [{schema: <missing ref>}, {}]
+    -> KeyError: 'schema'
+control: lax-or-strict with only the missing ref problem
+    -> MissingDefinitionError('missing')
+RESULT: 4 case(s) reported a later structural/cast error before MissingDefinitionError
+exit=0

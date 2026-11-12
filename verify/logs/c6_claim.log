@@ -1,0 +1,10 @@
+$ cd /home/ubuntu/repos/wt-734c6460 && /opt/venv-734c6460/bin/python /home/ubuntu/repos/pydantic/verify/repro/c6_public_exports_vs_docs.py
+pydantic_core file: /home/ubuntu/repos/wt-734c6460/pydantic-core/python/pydantic_core/__init__.py
+gathering symbols in pydantic_core.__all__: ['MissingDefinitionError', 'GatherResult', 'gather_schemas_for_cleaning']
+  MissingDefinitionError: importable=True module=pydantic_core._pydantic_core in docs member list=False
+  GatherResult: importable=True module=pydantic_core in docs member list=False
+  gather_schemas_for_cleaning: importable=True module=pydantic_core._pydantic_core in docs member list=False
+all __all__ entries absent from the docs member list: ['CoreConfig', 'CoreSchema', 'CoreSchemaType', 'GatherResult', 'MissingDefinitionError', 'PydanticUndefined', 'PydanticUndefinedType', 'UNSET', 'gather_schemas_for_cleaning']
+docs members absent from __all__: ['ErrorTypeInfo', 'MultiHostHost', 'list_all_errors']
+RESULT: 3 public gathering symbol(s) undocumented: ['MissingDefinitionError', 'GatherResult', 'gather_schemas_for_cleaning']
+exit=0

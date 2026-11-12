@@ -1,0 +1,10 @@
+$ cd /home/ubuntu/repos/pydantic && /opt/venv/bin/pyright --pythonpath /opt/venv/bin/python pydantic
+0 errors, 0 warnings, 0 informations
+
+exit=0
+$ cd /home/ubuntu/repos/pydantic/pydantic-core && /opt/venv/bin/pyright --pythonpath /opt/venv/bin/python   # = make -C pydantic-core pyright
+/home/ubuntu/repos/pydantic/pydantic-core/python/pydantic_core/__init__.py
+  /home/ubuntu/repos/pydantic/pydantic-core/python/pydantic_core/__init__.py:45:5 - warning: "UNSET" is specified in __all__ but is not present in module (reportUnsupportedDunderAll)
+0 errors, 1 warning, 0 informations
+
+exit=0

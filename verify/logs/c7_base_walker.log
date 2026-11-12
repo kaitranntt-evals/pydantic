@@ -1,0 +1,21 @@
+$ cd /home/ubuntu/repos/wt-c9d6135f && env PYTHONPATH=/tmp/basepy /opt/venv-c9d6135f/bin/python /home/ubuntu/repos/pydantic/verify/repro/c7_eager_sibling_preparation_error_order.py base_schema_gather
+lax-or-strict: lax_schema=<missing ref>, strict_schema absent
+    -> MissingDefinitionError('missing')
+union: choices=[<missing ref>, ()]
+    -> MissingDefinitionError('missing')
+union: choices=[<missing ref>, []] (list-valued child)
+    -> MissingDefinitionError('missing')
+chain: steps=[<missing ref>, []] (list-valued child)
+    -> MissingDefinitionError('missing')
+tuple: items_schema=[<missing ref>, 1]
+    -> MissingDefinitionError('missing')
+json-or-python: json_schema=<missing ref>, python_schema absent
+    -> MissingDefinitionError('missing')
+dict: keys_schema=<missing ref>, values_schema=[]
+    -> MissingDefinitionError('missing')
+arguments: [{schema: <missing ref>}, {}]
+    -> MissingDefinitionError('missing')
+control: lax-or-strict with only the missing ref problem
+    -> MissingDefinitionError('missing')
+RESULT: 0 case(s) reported a later structural/cast error before MissingDefinitionError
+exit=1

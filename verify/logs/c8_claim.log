@@ -1,0 +1,11 @@
+$ cd /home/ubuntu/repos/wt-e2125aea && /opt/venv-e2125aea/bin/python /home/ubuntu/repos/pydantic/verify/repro/c8_adapter_leftovers.py
+module-level imports/assignments: {'annotations': 'import (line 2)', 'Mapping': 'import (line 4)', 'TypeAlias': 'import (line 5)', 'TypedDict': 'import (line 5)', '_gather_schemas_for_cleaning': 'import (line 7)', 'ComputedField': 'import (line 8)', 'CoreSchema': 'import (line 8)', 'DefinitionReferenceSchema': 'import (line 8)', 'SerSchema': 'import (line 8)', 'AllSchemas': 'assignment (line 15)'}
+  ComputedField: import (line 8); referenced by executable code in the adapter: False; appears only inside a string alias: True; importers elsewhere: []
+  SerSchema: import (line 8); referenced by executable code in the adapter: False; appears only inside a string alias: True; importers elsewhere: []
+  AllSchemas: assignment (line 15); referenced by executable code in the adapter: False; appears only inside a string alias: False; importers elsewhere: []
+unused traversal-only declarations/imports: ['ComputedField', 'SerSchema', 'AllSchemas']
+file-wide directive: # pyright: reportTypedDictNotRequiredAccess=false, reportGeneralTypeIssues=false, reportArgumentType=false, reportAttributeAccessIssue=false
+pyright, file as delivered:       (0, ['0 errors, 0 warnings, 0 informations'])
+pyright, file-wide directive removed: (0, ['0 errors, 0 warnings, 0 informations'])
+RESULT: unused declarations: True | file-wide suppression no longer needed: True
+exit=0

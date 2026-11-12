@@ -1,0 +1,21 @@
+$ cd /home/ubuntu/repos/wt-c9d6135f && /opt/venv-c9d6135f/bin/python /home/ubuntu/repos/pydantic/verify/repro/c7_eager_sibling_preparation_error_order.py
+lax-or-strict: lax_schema=<missing ref>, strict_schema absent
+    -> KeyError: 'strict_schema'
+union: choices=[<missing ref>, ()]
+    -> IndexError: tuple index out of range
+union: choices=[<missing ref>, []] (list-valued child)
+    -> TypeError: 'list' object is not an instance of 'dict'
+chain: steps=[<missing ref>, []] (list-valued child)
+    -> TypeError: 'list' object is not an instance of 'dict'
+tuple: items_schema=[<missing ref>, 1]
+    -> TypeError: 'int' object is not an instance of 'dict'
+json-or-python: json_schema=<missing ref>, python_schema absent
+    -> KeyError: 'python_schema'
+dict: keys_schema=<missing ref>, values_schema=[]
+    -> TypeError: 'list' object is not an instance of 'dict'
+arguments: [{schema: <missing ref>}, {}]
+    -> KeyError: 'schema'
+control: lax-or-strict with only the missing ref problem
+    -> MissingDefinitionError('missing')
+RESULT: 8 case(s) reported a later structural/cast error before MissingDefinitionError
+exit=0

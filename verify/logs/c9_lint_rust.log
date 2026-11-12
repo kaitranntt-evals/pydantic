@@ -1,0 +1,107 @@
+make: Entering directory '/home/ubuntu/repos/pydantic/pydantic-core'
+cargo fmt --version
+rustfmt 1.10.0-stable (58cf8f9c35 2026-10-13)
+cargo fmt --all -- --check
+cargo clippy --version
+clippy 0.1.99 (58cf8f9c35 2026-10-13)
+cargo clippy --tests -- -D warnings
+    Checking zerofrom v0.1.4
+    Checking stable_deref_trait v1.2.0
+    Checking writeable v0.5.5
+    Checking litemap v0.7.3
+   Compiling pyo3-ffi v0.29.2
+    Checking smallvec v1.15.2
+    Checking icu_locid_transform_data v1.5.0
+    Checking libc v0.2.185
+   Compiling pyo3 v0.29.2
+    Checking static_assertions v1.1.0
+    Checking icu_properties_data v1.5.0
+    Checking yoke v0.7.4
+    Checking lexical-util v1.0.6
+    Checking num-traits v0.2.19
+    Checking write16 v1.0.0
+    Checking utf8_iter v1.0.4
+    Checking utf16_iter v1.0.5
+    Checking memchr v2.7.4
+    Checking icu_normalizer_data v1.5.0
+    Checking cfg-if v1.0.0
+    Checking once_cell v1.21.3
+    Checking zerovec v0.10.4
+    Checking tap v1.0.1
+    Checking radium v0.7.0
+    Checking wyz v0.5.1
+    Checking serde_core v1.0.228
+    Checking zerocopy v0.8.25
+    Checking aho-corasick v1.1.3
+    Checking allocator-api2 v0.2.21
+    Checking num-integer v0.1.46
+    Checking num-bigint v0.4.6
+    Checking lexical-parse-integer v1.0.5
+    Checking getrandom v0.3.3
+    Checking tinystr v0.7.6
+    Checking icu_collections v1.5.0
+    Checking lexical-parse-float v1.0.5
+    Checking icu_locid v1.5.0
+    Checking funty v2.0.0
+    Checking percent-encoding v2.3.2
+    Checking foldhash v0.2.0
+    Checking equivalent v1.0.2
+    Checking regex-syntax v0.8.11
+    Checking hashbrown v0.17.1
+    Checking form_urlencoded v1.2.2
+   Compiling jiter v0.16.0
+    Checking strum v0.27.2
+    Checking bitvec v1.0.1
+    Checking zmij v1.0.6
+    Checking icu_provider v1.5.0
+   Compiling pydantic-core v2.48.0 (/home/ubuntu/repos/pydantic/pydantic-core)
+    Checking ahash v0.8.12
+    Checking icu_locid_transform v1.5.0
+    Checking itoa v1.0.11
+    Checking lru v0.18.0
+    Checking speedate v0.17.0
+   Compiling enum_dispatch v0.3.13
+    Checking uuid v1.23.4
+    Checking serde_json v1.0.150
+    Checking serde v1.0.228
+    Checking hex v0.4.3
+    Checking icu_properties v1.5.1
+    Checking base64 v0.22.1
+    Checking regex-automata v0.4.13
+    Checking icu_normalizer v1.5.0
+    Checking idna_adapter v1.2.0
+    Checking idna v1.1.0
+    Checking regex v1.12.4
+    Checking url v2.5.8
+error: use of irregular braces for `write!` macro
+  --> src/definitions.rs:92:9
+   |
+92 |         write![f, "["]?;
+   |         ^^^^^^^^^^^^^^ help: consider writing: `write!(f, "[")`
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#nonstandard_macro_braces
+   = note: `-D clippy::nonstandard-macro-braces` implied by `-D warnings`
+   = help: to override `-D warnings` add `#[allow(clippy::nonstandard_macro_braces)]`
+
+error: use of irregular braces for `write!` macro
+  --> src/definitions.rs:95:13
+   |
+95 |             write![f, "{sep}{def:?}", sep = if first { "" } else { ", " }]?;
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider writing: `write!(f, "{sep}{def:?}", sep = if first { "" } else { ", " })`
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#nonstandard_macro_braces
+
+error: use of irregular braces for `write!` macro
+  --> src/definitions.rs:98:9
+   |
+98 |         write![f, "]"]?;
+   |         ^^^^^^^^^^^^^^ help: consider writing: `write!(f, "]")`
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#nonstandard_macro_braces
+
+error: could not compile `pydantic-core` (lib test) due to 3 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `pydantic-core` (lib) due to 3 previous errors
+make: *** [Makefile:86: lint-rust] Error 101
+make: Leaving directory '/home/ubuntu/repos/pydantic/pydantic-core'
+make -C pydantic-core lint-rust exit=2

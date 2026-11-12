@@ -1,0 +1,8 @@
+$ cd /tmp/basepy && /opt/venv/bin/python c4_base.py
+lifetime: completed first-branch wrapper still alive when the second generating branch starts: False
+skip: second-branch wrappers at a retained address: 50/50; their definition-refs missing from collected_references: 50/50; same set: True
+skip: 50 fresh refs to a missing definition in the second branch -> no exception (reused addresses 50/50)
+non-inlinable: single-use references u0..u49 marked non-inlinable (None): 2/50 (second-branch wrappers at a retained address: 50/50)
+control (list-held wrappers): non-inlinable 0 of 50
+RESULT: REPRODUCED (skip=True, non_inlinable=True)
+exit=0

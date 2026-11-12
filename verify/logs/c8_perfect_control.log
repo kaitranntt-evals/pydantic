@@ -1,0 +1,6 @@
+$ cd /home/ubuntu/repos/pydantic && /opt/venv/bin/python /home/ubuntu/repos/pydantic/verify/repro/c8_adapter_leftovers.py
+module-level imports/assignments: {'annotations': 'import (line 1)', 'TypedDict': 'import (line 3)', '_schema_gather': 'import (line 5)', 'CoreSchema': 'import (line 6)', 'DefinitionReferenceSchema': 'import (line 6)', '__all__': 'assignment (line 8)', 'MissingDefinitionError': 'assignment (line 14)'}
+unused traversal-only declarations/imports: []
+file-wide directive: None
+RESULT: unused declarations: False | file-wide suppression no longer needed: False
+exit=1

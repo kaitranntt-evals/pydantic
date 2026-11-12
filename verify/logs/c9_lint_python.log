@@ -1,0 +1,8 @@
+uv 0.13.7 (x86_64-unknown-linux-gnu)
+uv run ruff check pydantic tests docs/plugins release pydantic-core/python pydantic-core/tests pydantic-core/wasm-preview/run_tests.py
+Uninstalled 1 package in 0.70ms
+Installed 1 package in 1ms
+All checks passed!
+uv run ruff format --check pydantic tests docs/plugins release pydantic-core/python pydantic-core/tests pydantic-core/wasm-preview/run_tests.py
+354 files already formatted
+make lint-python exit=0

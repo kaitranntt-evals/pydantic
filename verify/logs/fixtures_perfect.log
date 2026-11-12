@@ -1,0 +1,6 @@
+$ cd /home/ubuntu/repos/pydantic && bash -c cp ~/fx/tests/test_eval_*.py tests/ && /opt/venv/bin/pytest tests/test_eval_schema_gather_*.py -q -p no:cacheprovider | tail -4; rm tests/test_eval_*.py
+........................................................................ [ 85%]
+............                                                             [100%]
+Results (0.64s):
+        84 passed
+exit=0

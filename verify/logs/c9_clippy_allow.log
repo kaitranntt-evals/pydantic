@@ -1,0 +1,6 @@
+   Compiling pyo3-ffi v0.29.2
+   Compiling pydantic-core v2.48.0 (/home/ubuntu/repos/pydantic/pydantic-core)
+   Compiling pyo3 v0.29.2
+   Compiling jiter v0.16.0
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 7.88s
+clippy with nonstandard_macro_braces allowed exit=0

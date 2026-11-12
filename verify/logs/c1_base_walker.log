@@ -1,0 +1,9 @@
+$ cd /tmp/basepy && /opt/venv/bin/python c1_base.py
+lifetime: first-branch schema still alive when the second generator branch starts: False
+A: second-branch schemas allocated at an address of a released first-branch schema: 50/50
+A: second-branch definition-refs absent from collected_references (skipped): 50/50
+A: skipped == reused-address set: True; refs at fresh addresses collected: True
+B: reused addresses: 50/50; outcome for 50 refs to a missing definition: no exception
+control (list-held): collected 50 of 50
+RESULT: STALE-ADDRESS SKIP REPRODUCED (A=True, B=True)
+exit=0

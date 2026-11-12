@@ -1,0 +1,7 @@
+$ cd /home/ubuntu/repos/pydantic && /opt/venv/bin/python /home/ubuntu/repos/pydantic/verify/repro/c6_public_exports_vs_docs.py
+pydantic_core file: /home/ubuntu/repos/pydantic/pydantic-core/python/pydantic_core/__init__.py
+gathering symbols in pydantic_core.__all__: []
+all __all__ entries absent from the docs member list: ['CoreConfig', 'CoreSchema', 'CoreSchemaType', 'PydanticUndefined', 'PydanticUndefinedType', 'UNSET']
+docs members absent from __all__: ['ErrorTypeInfo', 'MultiHostHost', 'list_all_errors']
+RESULT: no undocumented public gathering symbol
+exit=1
