@@ -1,0 +1,20 @@
+== declaration (/home/ubuntu/repos/pyd-base)
+699-
+700-@final
+701:class SchemaError(Exception):
+== pyright
+/tmp/tmp.0e8HCaqklr/probe.py
+  /tmp/tmp.0e8HCaqklr/probe.py:3:27 - error: "_pydantic_core" is private and used outside of the module in which it is declared (reportPrivateUsage)
+  /tmp/tmp.0e8HCaqklr/probe.py:3:27 - warning: Import "pydantic_core._pydantic_core" could not be resolved from source (reportMissingModuleSource)
+  /tmp/tmp.0e8HCaqklr/probe.py:6:15 - error: Base class "SchemaError" is marked final and cannot be subclassed (reportGeneralTypeIssues)
+  /tmp/tmp.0e8HCaqklr/probe.py:10:21 - error: Base class "SchemaError" is marked final and cannot be subclassed (reportGeneralTypeIssues)
+3 errors, 1 warning, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.414).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+pyright exit=1
+== mypy
+probe.py:6: error: Cannot inherit from final class "SchemaError"  [misc]
+probe.py:10: error: Cannot inherit from final class "SchemaError"  [misc]
+Found 2 errors in 1 file (checked 1 source file)
+mypy exit=1

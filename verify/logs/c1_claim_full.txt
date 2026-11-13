@@ -1,0 +1,28 @@
+== declaration (/home/ubuntu/repos/pyd-claim)
+701-
+702-@final
+703:class SchemaGatherMissingDefinitionError(LookupError):
+--
+716-    """
+717-
+718:class SchemaError(Exception):
+== pyright
+/tmp/tmp.HqmUsiyvBS/probe.py
+  /tmp/tmp.HqmUsiyvBS/probe.py:3:27 - error: "_pydantic_core" is private and used outside of the module in which it is declared (reportPrivateUsage)
+1 error, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.414).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+pyright exit=1
+== mypy
+Success: no issues found in 1 source file
+mypy exit=0
+== runtime
+/home/ubuntu/repos/pyd-claim/pydantic-core/python/pydantic_core/__init__.py
+Py_TPFLAGS_BASETYPE set: False
+Traceback (most recent call last):
+  File "/tmp/tmp.HqmUsiyvBS/probe.py", line 6, in <module>
+    class Derived(SchemaError):
+        pass
+TypeError: type 'pydantic_core._pydantic_core.SchemaError' is not an acceptable base type
+python exit=1
