@@ -1,0 +1,28 @@
+===== stubs from /home/ubuntu/repos/pyd-e635 (4779c9070)
+68-    """The list of core schemas having the discriminator application deferred."""
+69-
+70:class Some(Generic[_T]):
+ * Install prebuilt node (26.13.1) ..... done.
+0 errors, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.414).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+pyright exit=0
+/home/ubuntu/repos/pyd-e635/pydantic-core/python/pydantic_core/core_schema.py:4734: error: "object" has no attribute "__name__"; maybe "__ne__" or "__new__"?  [attr-defined]
+Found 1 error in 1 file (checked 1 source file)
+mypy exit=1
+===== stubs from /home/ubuntu/repos/pyd-base (a2c935478)
+46-
+47-@final
+48:class Some(Generic[_T]):
+/tmp/tmp.AzxmdMxusE/c3_some_subclass.py
+  /tmp/tmp.AzxmdMxusE/c3_some_subclass.py:5:14 - error: Base class "Some[int]" is marked final and cannot be subclassed (reportGeneralTypeIssues)
+1 error, 0 warnings, 0 informations
+WARNING: there is a new pyright version available (v1.1.411 -> v1.1.414).
+Please install the new version or set PYRIGHT_PYTHON_FORCE_VERSION to `latest`
+
+pyright exit=1
+/home/ubuntu/repos/pyd-base/pydantic-core/python/pydantic_core/core_schema.py:4734: error: "object" has no attribute "__name__"; maybe "__ne__" or "__new__"?  [attr-defined]
+c3_some_subclass.py:5: error: Cannot inherit from final class "Some"  [misc]
+Found 2 errors in 2 files (checked 1 source file)
+mypy exit=1

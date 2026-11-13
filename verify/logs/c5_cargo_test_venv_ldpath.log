@@ -1,0 +1,12 @@
+$ cd pydantic-core && VIRTUAL_ENV=/opt/venv PATH=/opt/venv/bin:$PATH LD_LIBRARY_PATH=/home/ubuntu/.local/share/uv/python/cpython-3.13.18-linux-x86_64-gnu/lib cargo test
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.03s
+     Running unittests src/lib.rs (target/debug/deps/_pydantic_core-f2e1cf6c33a04555)
+running 1 test
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/test.rs (target/debug/deps/test-413e3b7290da75fd)
+running 3 tests
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+   Doc-tests _pydantic_core
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+exit=0

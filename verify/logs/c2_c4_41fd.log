@@ -1,0 +1,16 @@
+### evalon/pydantic-s-41fd7c4c (f9125535d)
+schema_gather module: /home/ubuntu/repos/pyd-41fd/pydantic/_internal/_schema_gather.py
+pure-Python traverse_schema present: False
+== C2: arguments / arguments-v3
+{'type': 'arguments'}                                   -> RETURNED {'collected_references': {}, 'deferred_discriminator_schemas': []}
+{'type': 'arguments-v3'}                                -> RETURNED {'collected_references': {}, 'deferred_discriminator_schemas': []}
+control {'type': 'arguments', 'arguments_schema': []}   -> RETURNED {'collected_references': {}, 'deferred_discriminator_schemas': []}
+control {'type': 'arguments-v3', 'arguments_schema': []} -> RETURNED {'collected_references': {}, 'deferred_discriminator_schemas': []}
+control {'type': 'call'} (required arguments_schema)    -> RAISED KeyError('arguments_schema')
+== C4: lax-or-strict / json-or-python, one required child omitted at a time
+lax-or-strict without lax_schema                        -> RAISED KeyError('lax_schema/strict_schema')
+lax-or-strict without strict_schema                     -> RAISED KeyError('lax_schema/strict_schema')
+json-or-python without json_schema                      -> RAISED KeyError('json_schema/python_schema')
+json-or-python without python_schema                    -> RAISED KeyError('json_schema/python_schema')
+control lax-or-strict complete                          -> RETURNED {'collected_references': {}, 'deferred_discriminator_schemas': []}
+control json-or-python complete                         -> RETURNED {'collected_references': {}, 'deferred_discriminator_schemas': []}

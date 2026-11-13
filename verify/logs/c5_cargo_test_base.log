@@ -1,0 +1,12 @@
+$ (base a2c935478) cd pydantic-core && VIRTUAL_ENV=/opt/venv-base PATH=/opt/venv-base/bin:$PATH cargo test
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 12.09s
+     Running unittests src/lib.rs (target/debug/deps/_pydantic_core-f2e1cf6c33a04555)
+running 1 test
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/test.rs (target/debug/deps/test-413e3b7290da75fd)
+/home/ubuntu/repos/pyd-base/pydantic-core/target/debug/deps/test-413e3b7290da75fd: error while loading shared libraries: libpython3.13.so.1.0: cannot open shared object file: No such file or directory
+error: test failed, to rerun pass `--test test`
+Caused by:
+  process didn't exit successfully: `/home/ubuntu/repos/pyd-base/pydantic-core/target/debug/deps/test-413e3b7290da75fd` (exit status: 127)
+note: test exited abnormally; to see the full output pass --no-capture to the harness.
+exit=127

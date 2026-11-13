@@ -1,0 +1,24 @@
+== part child_collection: direct gather of a model-fields schema
+collected_references keys: ['ValDef']
+KeyDef collected: False
+gather with KeyDef missing from definitions -> {'collected_references': {}, 'deferred_discriminator_schemas': []} (no MissingDefinitionError)
+== part production_trigger: real models
+-- extra key type: Enum
+core schema type: model | extras_keys_schema: {'type': 'enum', 'cls': '...', 'members': '...', 'ref': '...', 'metadata': '...'}
+definition-ref left in cleaned schema: []
+validator class: SchemaValidator
+validate FAILED: TypeError 'Color' object is not an instance of 'str'
+SchemaValidator(core_schema) built OK
+-- extra key type: dataclass
+class creation FAILED: SchemaError Definitions error: definition `__main__.Key:712569712` was never filled
+-- extra key type: BaseModel
+class creation FAILED: SchemaError Definitions error: definition `__main__.Sub:713790704` was never filled
+== control: same dataclass as the extra *value* type (extras_schema edge is traversed)
+Ok built; validate: {'a': Key(x=1)}
+== what GenerateSchema hands to schema cleaning (before clean_schema)
+schema passed to finalize_schema: {'type': 'definition-ref', 'schema_ref': '__main__.M2:714091664'}
+definition '__main__.M2:714091664' -> model-fields extras_keys_schema (pre-clean): {'type': 'definition-ref', 'schema_ref': '__main__.Key:712569712'}
+pre-clean definitions: ['__main__.Key:712569712', '__main__.M2:714091664']
+gather collected_references keys: ['__main__.M2:714091664']
+post-clean type: model | extras_keys_schema: {'type': 'definition-ref', 'schema_ref': '__main__.Key:712569712'}
+class creation FAILED: SchemaError Definitions error: definition `__main__.Key:712569712` was never filled

@@ -1,0 +1,16 @@
+### base a2c935478 (pure-Python gather, control)
+schema_gather module: /home/ubuntu/repos/pyd-base/pydantic/_internal/_schema_gather.py
+pure-Python traverse_schema present: True
+== C2: arguments / arguments-v3
+{'type': 'arguments'}                                   -> RAISED KeyError('arguments_schema')
+{'type': 'arguments-v3'}                                -> RAISED KeyError('arguments_schema')
+control {'type': 'arguments', 'arguments_schema': []}   -> RETURNED {'collected_references': {}, 'deferred_discriminator_schemas': []}
+control {'type': 'arguments-v3', 'arguments_schema': []} -> RETURNED {'collected_references': {}, 'deferred_discriminator_schemas': []}
+control {'type': 'call'} (required arguments_schema)    -> RAISED KeyError('arguments_schema')
+== C4: lax-or-strict / json-or-python, one required child omitted at a time
+lax-or-strict without lax_schema                        -> RAISED KeyError('lax_schema')
+lax-or-strict without strict_schema                     -> RAISED KeyError('strict_schema')
+json-or-python without json_schema                      -> RAISED KeyError('json_schema')
+json-or-python without python_schema                    -> RAISED KeyError('python_schema')
+control lax-or-strict complete                          -> RETURNED {'collected_references': {}, 'deferred_discriminator_schemas': []}
+control json-or-python complete                         -> RETURNED {'collected_references': {}, 'deferred_discriminator_schemas': []}
